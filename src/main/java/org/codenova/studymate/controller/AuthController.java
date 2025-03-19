@@ -1,10 +1,13 @@
 package org.codenova.studymate.controller;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.codenova.studymate.model.Avatar;
+import org.codenova.studymate.model.LoginLog;
 import org.codenova.studymate.model.User;
 import org.codenova.studymate.repository.AvatarRepository;
+import org.codenova.studymate.repository.LoginLogRepository;
 import org.codenova.studymate.repository.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,12 +25,13 @@ public class AuthController {
 
     private AvatarRepository avatarRepository;
     private UserRepository userRepository;
+    private LoginLogRepository loginLogRepository;
+
 
     @RequestMapping("/signup")
     public String signupHandle(Model model) {
-        List<Avatar> avatars = avatarRepository.findAll();
-        System.out.println(avatars.size());
-        System.out.println(avatars);
+
+
         model.addAttribute("avatars", avatarRepository.findAll());
 
         return "auth/signup";
@@ -35,11 +39,11 @@ public class AuthController {
 
     @RequestMapping("/signup/verify")
     public String signupVerifyHandle(@ModelAttribute @Valid User user, BindingResult result, Model model) {
-        if(result.hasErrors()) {
+        if (result.hasErrors()) {
             // 에러처리를 하고,
             return "auth/signup/verify-failed";
         }
-        if(userRepository.findById(user.getId()) != null) {
+        if (userRepository.findById(user.getId()) != null) {
             // 에러 처리하고
             return "auth/signup/verify-failed";
         }
@@ -57,13 +61,19 @@ public class AuthController {
     @RequestMapping("/login/verify")
     public String loginVerifyHandle(@RequestParam("id") String id,
                                     @RequestParam("password") String password,
-                                    Model model) {
-        if(model. ){
+                                    HttpSession session) {
+        User found = userRepository.findById(id);
+        if (found == null || !found.getPassword().equals(password)) {
 
+            return "auth/login/verify-failed";
+        } else {
+            userRepository.updateLoginCountByUserId(id);
+            loginLogRepository.create(id);
+            session.setAttribute("user", found);
+            LoginLog latest = loginLogRepository.findLatestByUserId(id);
+            System.out.println(latest);
+            return "redirect:/index";
         }
-
-
-        return "redirect:/index";
     }
 
 

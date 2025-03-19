@@ -1,6 +1,7 @@
 package org.codenova.studymate.repository;
 import lombok.AllArgsConstructor;
 import org.codenova.studymate.model.Avatar;
+import org.codenova.studymate.model.User;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -13,5 +14,10 @@ public class AvatarRepository {
 
     public List<Avatar> findAll(){
         return template.selectList("avatar.findAll");
+    }
+
+    public Avatar findById(int id) {
+        return template.selectOne("avatar.findById",id);
+
     }
 }

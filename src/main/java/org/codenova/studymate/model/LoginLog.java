@@ -11,5 +11,4 @@ public class LoginLog {
     private int id;
     private String userId;
     private LocalDateTime loginAt;
-
 }

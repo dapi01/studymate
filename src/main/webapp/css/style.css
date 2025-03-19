@@ -41,7 +41,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    padding: 10px 0px;
 }
 .index-header div{
     display: flex;
@@ -70,12 +70,12 @@ body {
     max-width: 1000px;
     margin: auto;
     align-items: center;
+    gap : 20px;
 }
 
 
 /* related auth page -------------------------------------------------------- */
 .auth-header {
-
     padding : 15px;
     box-shadow: 0 1px 1px 0 rgba(0,0,0,.08);
     text-align: center;
@@ -110,4 +110,59 @@ body {
     height: 100px;
     margin-bottom: 20px;
     border : 1px solid rgba(0,0,0,.08);
+}
+
+
+/* related index-authenticated page  ------------------------ */
+.bottom-border-div {
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.08);
+}
+.wrap {
+    max-width: 960px;
+    margin : auto;
+}
+
+/* related my page ------------------------*/
+.my-main {
+    display: flex;
+    gap : 30px;
+    padding : 40px 0px;
+}
+.my-main-nav   {
+    list-style: none;
+    padding : 20px;
+    margin: 0px;
+    line-height: 30px;
+    background-color: #ffffff;
+}
+.my-main-nav li   {
+    padding :8px;
+    cursor: pointer;
+    font-size: 0.85em;
+}
+
+.my-main-nav .active {
+    font-weight: bold;
+    background-color: #f4f4f4;
+}
+.my-main .content {
+    padding : 20px;
+    flex : 1;
+    background-color: #ffffff;
+}
+.my-main .content > * {
+    border-bottom:  1px solid rgba(0,0,0,.08);
+}
+.my-main .content ul {
+    list-style: none;
+    line-height: 40px;
+}
+.my-main .content  li {
+    display: flex;
+    gap : 20px;
+    font-size : 0.8em;
+    align-items: baseline;
+}
+.my-main .content  span {
+    font-size: 1.5em;
 }

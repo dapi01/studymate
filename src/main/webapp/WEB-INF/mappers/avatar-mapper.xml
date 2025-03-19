@@ -9,5 +9,4 @@
     <select id="findById" resultType="avatar" parameterType="int">
         select * from avatars where id=#{id}
     </select>
-
 </mapper>

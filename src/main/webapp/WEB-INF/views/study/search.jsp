@@ -1,8 +1,9 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>공부가 쉬워진다 | 스터디메이트</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>스터디 만들기 | 스터디메이트</title>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css"/>
 </head>
 <body>
@@ -25,11 +26,28 @@ background-color: #afafaf; color:white" placeholder="스터디 검색" value="${
   </div>
 </div>
 <div>
-  <div class="index-main wrap">
-    <h2 style="border-bottom: 1px solid #333">내 그룹</h2>
+  <div class="study-main wrap">
+    <div style="font-size:1.5em; margin-top:20px;">검색결과 ${count}</div>
 
+    <c:forEach items="${result}" var="one">
+      <div style="border-bottom: 1px solid  rgba(0,0,0,.08); padding : 20px 0px;">
+        <h3 style="font-weight: 400">
+          <a href="#" style="text-underline-offset: 10px">${one.group.name}</a>
+        </h3>
+        <div>
+            ${one.group.goal}
+        </div>
+        <div style="display: flex; gap : 15px; margin-top: 2px; font-size: 0.85em">
+          <div style="color:#7f7f7f">
+            멤버 <span>${one.group.memberCount}</span>
+          </div>
+          <div style="color:#7f7f7f">
+            리더 <span>${one.creator.name}</span>
+          </div>
+        </div>
+      </div>
+    </c:forEach>
   </div>
 </div>
-
 </body>
 </html>

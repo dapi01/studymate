@@ -19,7 +19,9 @@ public class MyController {
     @RequestMapping("/profile")
     public String profileHandle(Model model, HttpSession session) {
         User user =(User)session.getAttribute("user");
+
         model.addAttribute("user",user);
+        model.addAttribute("hiddenId",user.getId().substring(0,2)+"*****");
         LoginLog latestLog =loginLogRepository.findLatestByUserId(user.getId());
         model.addAttribute("latestLog",latestLog);
 

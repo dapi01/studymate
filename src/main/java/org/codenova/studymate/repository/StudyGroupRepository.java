@@ -26,5 +26,11 @@ public class StudyGroupRepository {
     public StudyGroup findById(String id){
         return sqlSessionTemplate.selectOne("studyGroup.findById", id);
     }
+public int subtractMemberCountById(String id){
+        return sqlSessionTemplate.delete("studyGroup.subtractMemberCountById", id);
+}
+public int deleteById(String id){
+        return sqlSessionTemplate.delete("studyGroup.deleteById",id);
+}
 
 }

@@ -17,4 +17,12 @@
     <select id="findById" parameterType="string" resultType="studyGroup">
         select * from study_groups where id = #{id}
     </select>
+
+    <update id="subtractMemberCountById" parameterType="string">
+        update study_groups set member_count = member_count - 1 where id = #{id}
+    </update>
+    <delete id="deleteById" parameterType="string">
+        delete from study_groups where id = #{id}
+    </delete>
+
 </mapper>

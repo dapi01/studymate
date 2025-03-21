@@ -33,6 +33,11 @@ public class StudyMemberRepository {
     public StudyMember findByUserIdAndGroupId(Map params) {
         return sqlSessionTemplate.selectOne("studyMember.findByUserIdAndGroupId", params);
     }
-
+    public int deleteById(int id){
+        return sqlSessionTemplate.delete("studyMember.deleteById");
+    }
+    public int deleteByGroupId(String groupId){
+        return sqlSessionTemplate.delete("studyGroup.deleteByGroupId",groupId);
+    }
 
 }

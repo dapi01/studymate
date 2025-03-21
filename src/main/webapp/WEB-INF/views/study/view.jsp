@@ -27,26 +27,38 @@ background-color: #afafaf; color:white" placeholder="스터디 검색" value="${
 </div>
 <div>
   <div class="study-main wrap">
-    <div style="font-size:1.5em; margin-top:20px;">검색결과 ${count}</div>
+    <div style="display: flex; gap:20px">
+      <div style="width: 200px">
+        <h2>${group.name}</h2>
+        <p style="font-size : 0.8em">
+          멤버 <span>${group.memberCount}</span>
 
-    <c:forEach items="${result}" var="one">
-      <div style="border-bottom: 1px solid  rgba(0,0,0,.08); padding : 20px 0px;">
-        <h3 style="font-weight: 400">
-          <a href="${pageContext.request.contextPath}/study/${one.group.id}" style="text-underline-offset: 10px">${one.group.name}</a>
-        </h3>
-        <div>
-            ${one.group.goal}
-        </div>
-        <div style="display: flex; gap : 15px; margin-top: 2px; font-size: 0.85em">
-          <div style="color:#7f7f7f">
-            멤버 <span>${one.group.memberCount}</span>
-          </div>
-          <div style="color:#7f7f7f">
-            리더 <span>${one.creator.name}</span>
-          </div>
-        </div>
+        </p>
+        <p>
+          개설일 <span>${group.createdAt}</span>
+        </p>
+        <c:choose>
+          <c:when test="${status == 'NOT_JOINED'}">
+            <p>
+              <a href="${pageContext.request.contextPath}/study/${group.id}/join">
+                <button>스터디가입하기</button>
+              </a>
+            </p>
+          </c:when>
+          <c:when test="${status == 'PENDING'}">
+            <p>
+            <button style="width: 100%; padding: 5Px; font-size:1em;" disabled>승인 대기중</button>
+            </p>
+          </c:when>
+          <c:when test="${status == 'MEMBER'}">
+            <p>
+            <button style="width: 100%; padding: 5Px; font-size:1em;" disabled>스터디 탈퇴하기</button>
+            </p>
+          </c:when>
+        </c:choose>
+
       </div>
-    </c:forEach>
+    </div>
   </div>
 </div>
 </body>

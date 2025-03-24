@@ -246,12 +246,12 @@ public class StudyController {
 
     @RequestMapping("/{groupId}/post/{postId}/reaction")
     public String postReactionHandle(@ModelAttribute Reaction reaction, @SessionAttribute("user") User user) {
-
+        reaction.setWriterId(user.getId());
         Reaction found =
-                reactionRepository.findByWriterIdAndPostId(Map.of("writerId", user.getId(), "postId", reaction.getFeeling()));
+                reactionRepository.findByWriterIdAndPostId(Map.of("writerId", user.getId(), "postId", reaction.getPostId()));
 
         if (found == null) {
-            reaction.setWriterId(user.getId());
+
             reactionRepository.create(reaction);
        }else {  //-> 감정 변경하고 싶을시 : 지우고 다시 create
            reactionRepository.deleteById(found.getId());

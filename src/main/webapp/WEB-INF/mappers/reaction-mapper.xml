@@ -14,6 +14,6 @@
         select * from post_reactions where writer_id=#{writerId} and post_id=#{postId}
     </select>
     <delete id="deleteById" parameterType="int">
-        delete * from post_reactions where id = #{id}
+        delete from post_reactions where id = #{id}
     </delete>
 </mapper>

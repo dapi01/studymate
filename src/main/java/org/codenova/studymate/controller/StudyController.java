@@ -253,9 +253,9 @@ public class StudyController {
         if (found == null) {
             reaction.setWriterId(user.getId());
             reactionRepository.create(reaction);
-     //   }else { -> 감정 변경하고 싶을시 : 지우고 다시 create
-          //  reactionRepository.deleteById(found.getId());
-           // reactionRepository.create(reaction);
+       }else {  //-> 감정 변경하고 싶을시 : 지우고 다시 create
+           reactionRepository.deleteById(found.getId());
+           reactionRepository.create(reaction);
        }
 
         return "redirect:/study/" + reaction.getGroupId();

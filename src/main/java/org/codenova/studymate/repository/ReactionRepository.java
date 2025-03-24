@@ -25,4 +25,7 @@ public class ReactionRepository {
     public Reaction findByWriterIdAndPostId(Map map){
         return sqlSessionTemplate.selectOne("reaction.findByWriterIdAndPostId",map);
     }
+    public int deleteById(int id){
+        return sqlSessionTemplate.delete("reaction.deleteById",id);
+    }
 }
